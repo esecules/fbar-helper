@@ -1,0 +1,14 @@
+scotiabank:
+   ignoreFirstRow: False
+   ignoreLastRow: False
+   datesAscending: False
+   dateFormat: "%m/%d/%y"
+   dateColumn: 0
+   moneyColumn: 1
+tangerine:
+   ignoreFirstRow: True
+   ignoreLastRow: True
+   datesAscending: True
+   dateFormat: "%m/%d/%Y"
+   dateColumn: 0
+   moneyColumn: 4
