@@ -9,7 +9,7 @@ import yaml
 con = sqlite3.connect("transactions.db")
 cur = con.cursor()
 cur.execute("CREATE TABLE IF NOT EXISTS Transactions (timestamp INTEGER, amount REAL, account TEXT, PRIMARY KEY(timestamp, account));")
-cur.execute("create view if not exists dailyBalance(timestamp, transAmt, balance, account) as select timestamp, amount ,(select sum(amount) from Transactions t2 where t1.account == t2.account and t2.timestamp <= t1.timestamp) as balance, account from Transactions t1;")
+cur.execute("CREATE VIEW IF NOT EXISTS dailyBalance(timestamp, transAmt, balance, account) AS SELECT timestamp, amount ,(SELECT SUM(amount) FROM Transactions t2 WHERE t1.account == t2.account AND t2.timestamp <= t1.timestamp) AS balance, account FROM Transactions t1;")
 
 if len(sys.argv) == 3:
     with open( 'config.yaml', 'r' ) as f:
@@ -42,7 +42,7 @@ if len(sys.argv) == 3:
 cur=con.cursor()
 
 maxes = []
-for row in cur.execute("SELECT date( timestamp, 'unixepoch', 'localtime' ), account , max( balance ) FROM dailyBalance group by account"):
+for row in cur.execute("SELECT DATE( timestamp, 'unixepoch', 'localtime' ), account , MAX( balance ) FROM dailyBalance GROUP BY account"):
     maxes.append( row );
 
 print tabulate(maxes, headers=["date", "account", "balance" ], floatfmt=".2f")
