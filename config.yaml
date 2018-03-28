@@ -1,11 +1,24 @@
-scotiabank:
+# These are user-submitted and may not be up to date
+# Please add an entry for your own bank and consider making a pull request
+#
+# Explanation of config:
+#
+#YourBankNameWithoutSpaces:
+#    ignoreFirstRow: True if your first row has column names instead of values
+#    ignoreLastRow: Ture if the last line in your file is blank
+#    datesAscending: True if the first entry in the file is the oldest
+#    dateFormat: see https://www.tutorialspoint.com/python/time_strptime.htm
+#    dateColumn: the number of the column which contains the date (leftmost column is 0)
+#    moneyColumn: the number of the column which contains the transaction amount
+
+Scotiabank:
    ignoreFirstRow: False
    ignoreLastRow: False
    datesAscending: False
    dateFormat: "%m/%d/%y"
    dateColumn: 0
    moneyColumn: 1
-tangerine:
+Tangerine:
    ignoreFirstRow: True
    ignoreLastRow: True
    datesAscending: True

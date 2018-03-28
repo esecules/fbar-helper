@@ -16,7 +16,6 @@ if len(sys.argv) == 3:
         config = yaml.load(f)
     for bankName in config:
         bank=config[bankName]
-        print bankName
         with open(sys.argv[1],'rb') as fin: # `with` statement available in 2.5+
             # csv.DictReader uses first line in file for column headings by default
             dr = csv.reader(fin) # comma is default delimiter
@@ -36,14 +35,16 @@ if len(sys.argv) == 3:
                 continue
             cur.executemany("INSERT INTO Transactions (timestamp, amount, account) VALUES (?, ?, ?);", to_db)
             con.commit()
-            print "inserted %d transactions" % len(to_db)
+            print "%s CSV format used. Inserted %d transactions" % (bankName,len(to_db))
         break
     
 cur=con.cursor()
-
+print "-" * 50
+print "Results:"
+print "-" * 50
 maxes = []
 for row in cur.execute("SELECT DATE( timestamp, 'unixepoch', 'localtime' ), account , MAX( balance ) FROM dailyBalance GROUP BY account"):
     maxes.append( row );
 
-print tabulate(maxes, headers=["date", "account", "balance" ], floatfmt=".2f")
+print tabulate(maxes, headers=["Date", "Account", "Max Balance" ], floatfmt=".2f")
 con.close()
