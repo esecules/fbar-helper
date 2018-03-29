@@ -1,5 +1,5 @@
 # fbar-helper
-Python tool to help with finding the maximum account balance given a CSV file containing transactions.
+Python tool to help with finding the maximum account balance of several accounts given a CSV files containing transactions.
 
 # Usage
 * **First** you will need to add a row for each account with the year's starting balance. Something like:
