@@ -19,7 +19,7 @@ $ ./fbar-helper
 $ rm transactions.db
 ```
 
-* You will need to ensure that there are no transactions from other years in the CSV.
+* You will need to ensure that there are **no transactions from other years** in the CSV. 
 * Only one account's data per CSV file.
 * An account's transactions can be split across multiple CSV files.
 
